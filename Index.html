@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SPICT QR Attendance System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* BACKGROUND */
+
+body{
+font-family:'Segoe UI', Arial, sans-serif;
+background:linear-gradient(135deg,#e8f5e9,#c8e6c9);
+padding:15px;
+margin:0;
+}
+
+/* TOP LEFT LOGO */
+
+.top-left-logo{
+position:fixed;
+top:10px;
+left:10px;
+z-index:1000;
+}
+
+.top-left-logo img{
+width:60px;
+height:60px;
+border-radius:50%;
+background:white;
+padding:5px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+background:linear-gradient(90deg,#1b5e20,#2e7d32);
+color:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+margin-top:80px;
+}
+
+.logo{
+width:70px;
+height:70px;
+margin-right:15px;
+border-radius:50%;
+background:white;
+padding:5px;
+}
+
+.title h1{
+margin:0;
+font-size:18px;
+}
+
+.title h2{
+margin:2px 0;
+font-size:16px;
+color:#ffd54f;
+}
+
+.title p{
+margin:0;
+font-size:12px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:18px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+border-left:6px solid #2e7d32;
+}
+
+/* TEXT */
+
+h2,h3{
+text-align:center;
+color:#1b5e20;
+}
+
+/* SELECT */
+
+select{
+width:100%;
+padding:12px;
+margin-top:8px;
+font-size:16px;
+border-radius:8px;
+border:2px solid #c8e6c9;
+background:#f1f8e9;
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+padding:12px;
+margin-top:8px;
+font-size:16px;
+border-radius:8px;
+border:none;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.present{
+background:linear-gradient(90deg,#2e7d32,#43a047);
+color:white;
+}
+
+.half{
+background:linear-gradient(90deg,#f9a825,#fdd835);
+}
+
+.absent{
+background:linear-gradient(90deg,#c62828,#e53935);
+color:white;
+}
+
+.view{
+background:linear-gradient(90deg,#1565c0,#42a5f5);
+color:white;
+}
+
+.clear{
+background:linear-gradient(90deg,#424242,#757575);
+color:white;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th{
+background:#2e7d32;
+color:white;
+padding:10px;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+tr:hover{
+background:#f1f8e9;
+}
+
+/* DELETE BUTTON */
+
+.delete{
+background:#c62828;
+color:white;
+padding:6px 10px;
+border-radius:5px;
+border:none;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.logo{
+width:55px;
+height:55px;
+}
+
+.title h1{
+font-size:14px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!-- TOP LEFT LOGO -->
+
+<div class="top-left-logo">
+<img src="rdcas_logo.png">
+</div>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="title">
+
+<h1>RICARDO DIZON CANLAS AGRICULTURAL SCHOOL</h1>
+
+<h2>SPICT QR Attendance System</h2>
+
+<p>Smart • Paperless • Fast Attendance Monitoring</p>
+
+</div>
+
+</div>
+
+
+<!-- ATTENDANCE CARD -->
+
+<div class="card">
+
+<h2>QR Attendance Scanner</h2>
+
+<p>
+Subject: <b>Filipino</b><br>
+Time: <b>1:00 – 1:45</b><br>
+Adviser: <b>Mr. Edel Dionisio</b>
+</p>
+
+<select id="name">
+
+<option value="">Select Name</option>
+
+<option>Loaxell</option>
+<option>Andrew</option>
+<option>Adrian</option>
+<option>Sanlee</option>
+<option>Andree</option>
+<option>Daniel</option>
+<option>Joseph</option>
+<option>Marwin</option>
+<option>Ian</option>
+<option>Bernabe</option>
+
+<option>Kate</option>
+<option>Angelica</option>
+<option>Mary Joy</option>
+<option>Ronalyn</option>
+<option>Kershey</option>
+<option>Yurie</option>
+<option>Lorraine</option>
+<option>Dennis</option>
+<option>Eumie</option>
+<option>Teresa</option>
+<option>Jaja</option>
+<option>Sheila</option>
+<option>Lorevic</option>
+<option>Trishia</option>
+<option>Krishna</option>
+<option>Kristen</option>
+<option>Angel</option>
+<option>Maribeth</option>
+<option>Juela</option>
+<option>Precious</option>
+
+</select>
+
+<button class="present" onclick="markAttendance('In')">
+In
+</button>
+
+
+<button class="view" onclick="displayRecords()">
+View Record Management
+</button>
+
+<button class="clear" onclick="clearRecords()">
+Clear All Records
+</button>
+
+</div>
+
+
+<!-- RECORD TABLE -->
+
+<div class="card">
+
+<h3>Attendance Record Management</h3>
+
+<table id="recordTable">
+
+<tr>
+<th>Name</th>
+<th>Status</th>
+<th>Date</th>
+<th>Time</th>
+<th>Delete</th>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- PERCENTAGE TABLE -->
+
+<div class="card">
+
+<h3>Attendance Percentage</h3>
+
+<table id="percentTable">
+
+<tr>
+<th>Name</th>
+<th>Present</th>
+<th>Total</th>
+<th>Percentage</th>
+</tr>
+
+</table>
+
+</div>
+
+
+<script>
+
+/* MARK ATTENDANCE */
+
+function markAttendance(status){
+
+let name=document.getElementById("name").value;
+
+if(name==""){
+alert("Select name first");
+return;
+}
+
+let now=new Date();
+
+let record={
+
+name:name,
+status:status,
+date:now.toLocaleDateString(),
+time:now.toLocaleTimeString()
+
+};
+
+let records=JSON.parse(localStorage.getItem("attendance"))||[];
+
+records.push( bme,
+status:status,
+date:now.toLocaleDateString(),
+time:now.toLocaleTimeString()
+
+};
+
+let records=JSON.parse(localStorage.getItem("attendance"))||[];
+
+records.push(
